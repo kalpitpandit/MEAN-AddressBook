@@ -1,0 +1,89 @@
+<!-- @author : Kalpit Pandit
+@email : panditkalpit@gmail.com -->
+<!DOCTYPE html>
+<html lang="en" ng-app="addressBook">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Addressbook</title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body ng-controller="contacts" class="">
+    <div class="container">
+      <h4 class="success-message">Contact saved successfully...</h4>
+      <header>
+          <h1>Address Book</h1>
+      </header>
+      <div class="main-wrapper">
+         <div class="top-head">
+                <div class="head-lef">
+                    <h4>All contacts</h4>
+                    <button class="add" ng-click="resetScope()">+</button>
+                    <button class="edit" ng-click="editContact(contact._id)">Edit</button>
+                </div>
+            </div>
+          <div class="content-left">
+            <div class="wrapper-search">
+                <input type="text" placeholder="Search" ng-model="search">
+            </div>
+            <ul class="contact-list">
+              <li ng-repeat="contact in allContacts | filter: search" ng-click="showDetails(contact._id);"> {{contact.first_name}} {{contact.last_name}}</li>
+            </ul>
+          </div>
+          <div class="content-right">
+              <div class="contact-detail">
+                  <h4>{{contact.first_name}} {{contact.last_name}}</h4>
+                  <ul>
+                      <li>
+                        <input type="hidden" value="{{contact._id}}">
+                      </li>
+                      <li>
+                        <label>mobile</label>
+                        <span>{{contact.mobile_phone}}</span>
+                      </li>
+                      <li>
+                        <label>home</label>
+                        <span>{{contact.home_phone}}</span>
+                      </li>
+                      <li>
+                        <label>Email</label>
+                        <span>{{contact.email}}</span>
+                      </li>
+                      <li>
+                        <label>address</label>
+                        <span>{{contact.address}}</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="contact-popup">
+      <span class="close">x</span>
+      <span class=error>{{error}}</span>
+      <form id="save-form">
+        <label>First Name *</label>
+        <input name="first_name" ng-model="first_name" type="text" reqired>
+        <label>Last Name</label>
+        <input name="last_name" ng-model="last_name" type="text" reqired>
+        <label>Mobile Phone *</label>
+        <input name="mobile_phone" ng-model="mobile_phone" type="number" reqired>
+        <label>Home Phone</label>
+        <input name="home-phone" ng-model="home_phone" type="number" reqired>
+        <label>Email</label>
+        <input name="email" ng-model="email" type="email" reqired>
+        <label>Address</label>
+        <input name="address" ng-model="address" type="text" reqired>
+        <input type="hidden" ng-model="contact_mode">
+        <input type="hidden" ng-model="contact_id">
+        <button ng-click="saveContact()">Add</button>
+      </form>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+  </body>
+</html>
